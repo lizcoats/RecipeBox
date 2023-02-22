@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  apis:
+    # you'll obviously use your own account
+    image: clujana/api-prod:$NEW_VERSION 
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=$SECRET_KEY
+      - DEBUG=$DEBUG
+  nginx:
+  # you'll obviously use your own account
+    image: clujana/webserver-prod:$NEW_VERSION
+    restart: always
+    ports:
+      - "80:80"
+
