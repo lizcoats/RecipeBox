@@ -7,41 +7,8 @@
 
 }
 
-
-.app-header {
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  justify-content: space-between;
-  background-color: var(--color-lighter);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.app-header h1 {
-  font-size: 30px;
-  color: var(--color-dark);
-  font-weight: 800;
-  text-align: center;
-}
-
-.app-header button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.app-header button > svg {
-  fill: var(--color-dark);
-  height: 25px;
-  width: 25px;
-  object-fit: cover;
-}
-
-.app-body {
-  padding: 16px;
-}
 .title-text {
-  color:#09383d;
+  color:#340529;;
   padding: 20px;
 }
 
@@ -128,15 +95,12 @@
   text-align: center;
 }
 
-
-
-
 .recipes-list {
   padding: 0;
   margin: 16px 0;
   height: 70vh;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
 }
 
 .recipes-list::-webkit-scrollbar {
@@ -193,19 +157,20 @@
 .floating-button > svg {
   fill: var(--color-bg);
 }
+
 .nav-home {
   margin-left: 5px;
   margin-right: 5px;
   text-decoration: none;
   font-size: 24px;
-  color: #282c34;
+  color: rgb(50, 49, 49);
   font-weight: 600;
   padding: 2px;
 }
 
 .nav-home:hover {
-  background-color:green;
-  color: black;
+  background-color:#286970;
+  color: aliceblue;
 }
 
 .nav-recipes{
@@ -213,13 +178,13 @@
   margin-right: 5px;
   text-decoration: none;
   font-size: 24px;
-  color: #282c34;
+  color: rgb(50, 49, 49);
   font-weight: 600;
   padding: 2px;
 }
 
 .nav-recipes:hover {
-  background-color: green;
+  background-color:#286970;
   color: aliceblue;
 }
 
@@ -245,4 +210,41 @@
   text-decoration: #282c34;
   margin: 10px;
   padding: 2px;
+}
+.logout-button{
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.quiz-container {
+  height: 25vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  font-family: "Karla";
+  font-weight: 800;
+  font-size: 18px;
+  color: #340529;
+
+}
+.search-button{
+  background: #286970;
+  border: 5px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  
+  margin: 0 0 0 10px;
+  }
+
+.front-image{
+  width: 500px;
+  height:475px;
+  padding:20px
+
+
 }

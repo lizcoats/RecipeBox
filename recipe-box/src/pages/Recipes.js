@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState} from 'react'
 import Recipe from '../Recipe';
+import Trivia from './Trivia';
 
 
 function Recipes() {
@@ -8,8 +9,6 @@ function Recipes() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   console.log(API_ID, API_KEY)
 
-
-  
   const [recipes, setRecipes] = useState([]);
   const[search,setSearch] = useState('');
 
@@ -51,6 +50,8 @@ function Recipes() {
 
     ))}
   </div>
+  <img className="front-image" src="/seafood.jpg" alt="image" />
+  <Trivia />
   </div>
   )
 }

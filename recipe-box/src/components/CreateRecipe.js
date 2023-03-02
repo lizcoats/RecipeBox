@@ -1,27 +1,25 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useEffect } from 'react'
+import { useState,useContext} from 'react'
 import { useNavigate } from "react-router-dom"
+import AuthContext from '../context/AuthContext';
 
 
 function CreateRecipe() {
 
   const navigate = useNavigate()
+  let {authTokens} = useContext(AuthContext)
+  // let {addRecipe} = useContext(AuthContext)
 
-  const [recipeName, setRecipeName] = useState()
-  const [ingredients, setRecipeIngredients] = useState()
-  const [time, setRecipeTime] = useState()
-  const [instructions, setRecipeInstructions] = useState()
-  const [errors, setErrors] = useState()
-
-  const handleRecipeNameChange = (e) => setRecipeName(e.target.value)
-  const handleRecipeIngredientsChange = (e) => setRecipeIngredients(e.target.value)
-  const handleRecipeTimeChange = (e) => setRecipeTime(e.target.value)
-  const handleRecipeInstructionsChange = (e) => setRecipeInstructions(e.target.value)
-
+  const [name, setName] = useState('')
+  const [ingredients, setIngredients] = useState('')
+  const [time, setTime] = useState('')
+  const [instructions, setInstructions] = useState('')
+  const [errors, setErrors] = useState('')
+ 
   const handleSubmit = (e) => {
     e.preventDefault()
     const recipeObject = {
-      name: recipeName,
+      name: name,
       ingredients: ingredients,
       time: time,
       instructions: instructions
@@ -30,17 +28,22 @@ function CreateRecipe() {
     addRecipe(recipeObject)
 
   }
-  const BASE_URL = "http://127.0.0.1:8000"
+
+
+const BASE_URL = "http://127.0.0.1:8000"
 
   const addRecipe = async (recipeObj) => {
     const url =  BASE_URL
     const context = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + String(authTokens.access)
       },
       body: JSON.stringify(recipeObj)
     }
+    // console.log(authTokens)
+    // console.log(context)
     const resp = await fetch(url, context)
     const body = await resp.json()
     if (resp.status === 400) {
@@ -49,35 +52,33 @@ function CreateRecipe() {
       navigate("/recipe")
     }
   }
+  
 return(
+  
   <div className= 'container'>
-      <h2>Create Recipe</h2>
+      <h2 style={{color:"#340529"}}>Create Recipe</h2>
       {errors && <h4>{JSON.stringify(errors)}</h4>}
+      {/* <form onSubmit={handleSubmit}> */}
       
       <div className="form=group">
-      {/* <label htmlFor="recipeName">Name:</label> */}
-      <input type="text" className="form-control form_control-lg" placeholder="Enter Recipe Name" value={recipeName} name="recipeName" onChange={handleRecipeNameChange}></input>
+      <input type="text" className="form-control form_control-lg" placeholder="Enter Recipe Name" value={name} name="name" onChange={(e) => setName(e.target.value)}></input>
       </div>
       
       <div className="form=group">
-      {/* <label htmlFor="recipeIngredients">Ingredients:</label> */}
-      <input type="text" className="form-control form_control-lg" placeholder="Enter Ingredients" value={ingredients} name="recipeIngredients" onChange={handleRecipeIngredientsChange}></input>
+      <input type="text" className="form-control form_control-lg" placeholder="Enter Ingredients" value={ingredients} name="ingredients" onChange={(e) => setIngredients(e.target.value)}></input>
       </div>
     
       <div className="form=group">
-      {/* <label htmlFor="recipeTime">Cooking Time:</label> */}
-      <input type="text" className="form-control form_control-lg" placeholder="Enter Total Time" value={time} name="recipeTime" onChange={handleRecipeTimeChange}></input>
+      <input type="text" className="form-control form_control-lg" placeholder="Enter Total Time" value={time} name="time" onChange={(e) => setTime(e.target.value)}></input>
       </div>
      
       <div type="text" className="form=group">
-      {/* <label htmlFor="recipeInstructions">Instructions:</label> */}
-      <input className="form-control form_control-lg" placeholder="Enter Directions" value={instructions} name="recipeInstructions" onChange={handleRecipeInstructionsChange}></input>
+      <input className="form-control form_control-lg" placeholder="Enter Directions" value={instructions} name="instructions" onChange={(e) => setInstructions(e.target.value)}></input>
       </div>
-     
-      
-      <button className="btn-btn-success" onClick={handleSubmit}>Submit</button>
-     
-    </div>
-  )}
+      {/* <input type="submit" value="Submit" /> */}
+      <button className="search-button" onClick={handleSubmit}>Submit</button>
+      {/* </form> */}
+  </div>
+ )}
 
 export default CreateRecipe

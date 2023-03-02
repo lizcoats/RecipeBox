@@ -1,12 +1,59 @@
+from rest_framework import generics
+from .models import Recipe
+from .serializers import RecipeSerializer
+from rest_framework.permissions import IsAuthenticated
 
-from django.shortcuts import render
-from .serializers import RecipeSerializer 
-from rest_framework import viewsets      
-from .models import Recipe                
+class RecipeList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = RecipeSerializer
+    def get_queryset(self):
+        """
+        This view should return a list of all the recipes
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return Recipe.objects.filter(author=user)
+    def perform_create(self,serializer):
+        serializer.save(author = self.request.user)
+      
 
-class RecipeView(viewsets.ModelViewSet):  
-    serializer_class =RecipeSerializer   
-    queryset =Recipe.objects.all()   
+class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = RecipeSerializer
+    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+        return Recipe.objects.filter(author=user)
+
+    def perform_create(self,serializer):
+        serializer.save(author = self.request.user)
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        # ...
+        return token
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class =  MyTokenObtainPairSerializer
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes=[
+        'token/',
+        'token/refresh',
+    ]
+    return Response(routes)
 
 
 
@@ -93,6 +140,7 @@ class RecipeView(viewsets.ModelViewSet):
 # from django.shortcuts import get_object_or_404
 # from .serializers import RecipeSerializer
 # from .models import Recipe
+
 
 # class RecipesView(APIView):
 
