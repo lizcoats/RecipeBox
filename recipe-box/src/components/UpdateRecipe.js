@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, {useState, useEffect, useContext} from 'react';
 import { Form, useNavigate, useParams } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
+import axios from 'axios'
 
 const UpdateRecipe = () => {
 
@@ -35,36 +35,29 @@ const UpdateRecipe = () => {
         loadRecipes();
     }, [])
 
-    const updateRecipe = async()=>{
+  const updateRecipe = async()=>{
       let formField = new FormData()
-      formField.append('name',name)
-      formField.append('ingredients',ingredients)
-      formField.append('time',time)
-      formField.append('instructions',instructions)
-
-      const response = await fetch(`/${id}`, {
-        method: "OPTIONS",
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + String(authTokens.access)
-        }
-      })
-      const data = await response.json()
-      console.log(data)
-      navigate('/recipe')
-    }
+       formField.append('name',name)
+       formField.append('ingredients',ingredients)
+       formField.append('time',time)
+       formField.append('instructions',instructions)
+       
+        await axios({
+          method: 'PUT',
+          url: `http://127.0.0.1:8000/${id}/`,
+          data: formField,
+          headers:{
+            'Authorization': 'Bearer ' + String(authTokens.access),
+            'Content-Type': 'application/json'
+          } 
+        }).then(response => {
+        console.log(response.data);
+        navigate("/recipe");
+    })
     
- 
-  
-  const handleSubmit =() =>{
-    updateRecipe()
-    navigate("/recipe")
-   
-  }
-
-return (
- 
-        <div className="container">
+    }
+ return (
+      <div className="container">
 
     <h2 style={{color:"#340529"}}>Update A Recipe</h2>
     
@@ -110,7 +103,7 @@ return (
         />
       </div>
       
-      <button className= "search-button" onClick={handleSubmit}>Update Recipe</button>
+      <button className= "search-button" onClick={updateRecipe}>Update Recipe</button>
   </div>
    );
 };

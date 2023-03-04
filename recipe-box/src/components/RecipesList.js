@@ -20,6 +20,8 @@ let {authTokens} = useContext(AuthContext)
             }
           })
         const data = await response.json()
+        
+        console.log(data)
         setRecipes(data)
     }
 

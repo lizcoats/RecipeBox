@@ -8,7 +8,7 @@ function CreateRecipe() {
 
   const navigate = useNavigate()
   let {authTokens} = useContext(AuthContext)
-  // let {addRecipe} = useContext(AuthContext)
+ 
 
   const [name, setName] = useState('')
   const [ingredients, setIngredients] = useState('')
@@ -58,7 +58,7 @@ return(
   <div className= 'container'>
       <h2 style={{color:"#340529"}}>Create Recipe</h2>
       {errors && <h4>{JSON.stringify(errors)}</h4>}
-      {/* <form onSubmit={handleSubmit}> */}
+     
       
       <div className="form=group">
       <input type="text" className="form-control form_control-lg" placeholder="Enter Recipe Name" value={name} name="name" onChange={(e) => setName(e.target.value)}></input>
@@ -75,9 +75,9 @@ return(
       <div type="text" className="form=group">
       <input className="form-control form_control-lg" placeholder="Enter Directions" value={instructions} name="instructions" onChange={(e) => setInstructions(e.target.value)}></input>
       </div>
-      {/* <input type="submit" value="Submit" /> */}
+    
       <button className="search-button" onClick={handleSubmit}>Submit</button>
-      {/* </form> */}
+     
   </div>
  )}
 
