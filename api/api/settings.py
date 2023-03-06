@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'recipes',
     'corsheaders',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
     'accounts',
    
 ]
@@ -98,15 +99,16 @@ REST_FRAMEWORK = {
     # ]
      'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        
     ]
 }
 
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
-    "ROTATE_REFRESH_TOKENS": False,
+    "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
 

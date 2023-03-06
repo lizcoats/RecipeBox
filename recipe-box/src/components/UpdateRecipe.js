@@ -36,7 +36,7 @@ const UpdateRecipe = () => {
     }, [])
 
   const updateRecipe = async()=>{
-      let formField = new FormData()
+       let formField = new FormData() /*The FormData() constructor creates a new FormData object.*/
        formField.append('name',name)
        formField.append('ingredients',ingredients)
        formField.append('time',time)
