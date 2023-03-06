@@ -11,8 +11,13 @@ const RecipesList = () => {
 const [recipes, setRecipes] = useState([])
 let {authTokens} = useContext(AuthContext)
 
+
+
     const getRecipes = async () => {
-        const response = await fetch('http://localhost:8000', {
+        
+        const response = await fetch('http://localhost:8000/recipes', {
+        // const base_url = process.env.REACT_APP_BASE_URL
+        // const response = await fetch(`http://${base_url}`, {
             method: "GET",
             headers: {
             'Content-Type': 'application/json',

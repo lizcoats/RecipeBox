@@ -15,7 +15,7 @@ const UpdateRecipe = () => {
     const [instructions, setInstructions] = useState('')
 
     const loadRecipes = async() =>{
-    const response = await fetch(`/${id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/recipes/${id}`, {
         method: "GET",
         headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const UpdateRecipe = () => {
        
         await axios({
           method: 'PUT',
-          url: `http://127.0.0.1:8000/${id}/`,
+          url: `http://127.0.0.1:8000/recipes/${id}/`,
           data: formField,
           headers:{
             'Authorization': 'Bearer ' + String(authTokens.access),

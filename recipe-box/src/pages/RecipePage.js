@@ -18,7 +18,7 @@ useEffect(() => {
     }, [id])
 
 const getRecipe = async() =>{
-  const response = await fetch(`/${id}`, {
+  const response = await fetch(`http://127.0.0.1:8000/recipes/${id}`, {
     method: "GET",
     headers: {
     'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const headers = {
  
 };
   const deleteRecipe = async (id) =>{
-  await axios.delete(`/${id}`, {headers})
+  await axios.delete(`http://127.0.0.1:8000/recipes/${id}`, {headers})
   navigate("/recipe")
 }
 return(

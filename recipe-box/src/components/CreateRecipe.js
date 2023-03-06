@@ -30,10 +30,11 @@ function CreateRecipe() {
   }
 
 
-const BASE_URL = "http://127.0.0.1:8000"
+const base_url = "http://127.0.0.1:8000/recipes/"
+// const base_url = process.env.REACT_APP_BASE_URL
 
   const addRecipe = async (recipeObj) => {
-    const url =  BASE_URL
+    const url =  base_url
     const context = {
       method: "POST",
       headers: {
