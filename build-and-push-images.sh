@@ -10,11 +10,20 @@
 # instead of localhost
 ##############################
 
+# BASE_URL=$1
+# NEW_VERSION=$2
+
+# docker build --build-arg REACT_APP_BASE_URL=$BASE_URL -t clujana/webserver-prod:$NEW_VERSION -f webserver/Dockerfile . --no-cache
+# docker push clujana/webserver-prod:$NEW_VERSION
+
+# docker build -t clujana/api-prod:$NEW_VERSION -f api/Dockerfile ./api --no-cache
+# docker push clujana/api-prod:$NEW_VERSION
+
 BASE_URL=$1
 NEW_VERSION=$2
 
-docker build --build-arg REACT_APP_BASE_URL=$BASE_URL -t clujana/webserver-prod:$NEW_VERSION -f webserver/Dockerfile . --no-cache
+docker buildx build --platform linux/amd64 --build-arg REACT_APP_BASE_URL=$BASE_URL -t clujana/webserver-prod:$NEW_VERSION -f webserver/Dockerfile . --no-cache
 docker push clujana/webserver-prod:$NEW_VERSION
 
-docker build -t clujana/api-prod:$NEW_VERSION -f api/Dockerfile ./api --no-cache
-docker push clujana/api-prod:$NEW_VERSION
+docker buildx build --platform linux/amd64  -t clujana/api-prod:$NEW_VERSION -f api/Dockerfile ./api --no-cache
+docker push clujana/api-prod:$NEW_VERSION 

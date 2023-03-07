@@ -8,6 +8,7 @@ const UpdateRecipe = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     let {authTokens} = useContext(AuthContext)
+   
 
     const [name, setName] = useState('')
     const [ingredients, setIngredients] = useState('')
@@ -15,7 +16,10 @@ const UpdateRecipe = () => {
     const [instructions, setInstructions] = useState('')
 
     const loadRecipes = async() =>{
-    const response = await fetch(`http://127.0.0.1:8000/recipes/${id}`, {
+      const base_url = process.env.REACT_APP_BASE_URL
+    // const response = await fetch(`http://127.0.0.1:8000/recipes/${id}`, {
+    
+      const response = await fetch(`http://${base_url}/recipes/${id}`, {
         method: "GET",
         headers: {
         'Content-Type': 'application/json',
@@ -41,10 +45,13 @@ const UpdateRecipe = () => {
        formField.append('ingredients',ingredients)
        formField.append('time',time)
        formField.append('instructions',instructions)
+
+       const base_url = process.env.REACT_APP_BASE_URL
        
         await axios({
           method: 'PUT',
-          url: `http://127.0.0.1:8000/recipes/${id}/`,
+          // url: `http://127.0.0.1:8000/recipes/${id}/`,
+          url: `http://${base_url}/recipes/${id}/`,
           data: formField,
           headers:{
             'Authorization': 'Bearer ' + String(authTokens.access),

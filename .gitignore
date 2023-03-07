@@ -1,5 +1,4 @@
 .env
-fullstack.pem 
+project.pem 
 .DS_Store
 venv
-# replace with current one from AWS

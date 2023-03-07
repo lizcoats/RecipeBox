@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,22 @@ from datetime import timedelta
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=kx^io1ngzig090q-!-*^nxthd7@e^t78ej99y5dlslpa&vfdo'
+# SECRET_KEY = 'django-insecure-=kx^io1ngzig090q-!-*^nxthd7@e^t78ej99y5dlslpa&vfdo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+
+SECRET_KEY = os.getenv("SECRET_KEY") 
+
+DEBUG =  True if os.getenv("DEBUG") == "True" else False
+
+ALLOWED_HOSTS = ["*"]
 
 
 

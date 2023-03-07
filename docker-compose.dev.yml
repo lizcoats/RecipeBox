@@ -5,7 +5,7 @@
 
 version: "3.9"
 services:
-  apis:
+  api:
     build: ./api
     ports:
       - "8000:8000"

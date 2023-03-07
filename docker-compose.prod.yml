@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  apis:
+  api:
     # you'll obviously use your own account
     image: clujana/api-prod:$NEW_VERSION 
     ports:

@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect,useState, useContext} from 'react';
 import {Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import axios from 'axios'
 import AuthContext from '../context/AuthContext';
 
@@ -13,12 +13,16 @@ const {id} = useParams()
 const navigate = useNavigate()
 let {authTokens} = useContext(AuthContext)
 
+
 useEffect(() => {
       getRecipe()
     }, [id])
 
 const getRecipe = async() =>{
-  const response = await fetch(`http://127.0.0.1:8000/recipes/${id}`, {
+  const base_url = process.env.REACT_APP_BASE_URL
+  // const response = await fetch(`http://127.0.0.1:8000/recipes/${id}`, {
+  
+  const response = await fetch(`http://${base_url}/recipes/${id}`, {
     method: "GET",
     headers: {
     'Content-Type': 'application/json',
@@ -34,7 +38,9 @@ const headers = {
  
 };
   const deleteRecipe = async (id) =>{
-  await axios.delete(`http://127.0.0.1:8000/recipes/${id}`, {headers})
+  const base_url = process.env.REACT_APP_BASE_URL
+  // await axios.delete(`http://127.0.0.1:8000/recipes/${id}`, {headers})
+  await axios.delete(`http://${base_url}/recipes/${id}`, {headers})
   navigate("/recipe")
 }
 return(
