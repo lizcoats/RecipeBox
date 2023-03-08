@@ -51,6 +51,7 @@ function Recipes() {
     ))}
   </div>
   <img className="front-image" src="/seafood.jpg" alt="image" />
+  {/* <img className="front-image" src={process.env.PUBLIC_URL + '/seafood.jpg'} />  */}
   <Trivia />
   </div>
   )
